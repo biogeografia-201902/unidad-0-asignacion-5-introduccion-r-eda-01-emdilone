@@ -6,10 +6,10 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  eval = F,
+  eval = T,
   echo = TRUE,
   collapse=TRUE,
-  fig.path = "../img/"
+  fig.path = "img/"
   
 )
 ```
@@ -23,13 +23,13 @@ Estudia este texto, y responde a los siguientes mandatos. Donde veas `...` debes
 Consulta las referencias sobre los paquetes necesarios y los conjuntos de datos [`doubs`](https://github.com/biogeografia-201902/material-de-apoyo/blob/master/ref/introduccion-a-r.md#el-conjunto-de-datos-doubs), [`BCI`](https://github.com/biogeografia-201902/material-de-apoyo/blob/master/ref/introduccion-a-r.md#el-conjunto-de-datos-bci) y [`mite`](https://github.com/biogeografia-201902/material-de-apoyo/blob/master/ref/introduccion-a-r.md#el-conjunto-de-datos-mite). Recuerda que `doubs` es un conjunto de datos incluido en una lista, mientras que `BCI` y `mite` tienen las matrices de comunidad y ambiental por separado.
 
 ```{r}
-library(...)
-library(...)
-data(...)
-data(...)
-data(...)
-data(...)
-data(...)
+library(vegan)
+library(ade4)
+data(mite)
+data(doubs)
+data(BCI)
+data(mite.env)
+data(BCI.env)
 ```
 
 ## Basicos de una matriz de comunidad
@@ -39,55 +39,55 @@ Consulta [esta referencia](https://github.com/biogeografia-201902/material-de-ap
 * Número de sitios de cada conjunto (doubs, BCI, mite)
 
 ```{r}
-nrow(...)
-nrow(...)
-nrow(...)
+nrow(mite)
+nrow(doubs$fish)
+nrow(BCI)
 ```
 
 * Riqueza numérica de especies por sitio de `BCI`
 
 ```{r}
-specnumber(...)
+specnumber(BCI)
 ```
 
 * Riqueza numérica por sitios de `mite`. Adicionalmente, mostrar los sitios en orden ascendente y descendente según dicha variable
 
 ```{r}
-sort(specnumber(...))
-sort(specnumber(...), ...) #Usa la ayuda para determinar qué argumento debes colocar aquí
+sort(specnumber(mite))
+sort(specnumber(mite), decreasing = T) #Usa la ayuda para determinar qué argumento debes colocar aquí
 ```
 
 * Abundancia (número de individuos) de cada especie del conjunto `doubs`
 
 ```{r}
-colSums(...)
+colSums(doubs$fish)
 ```
 
 * Abundancia por sitios (especies combinadas, *species pooled*) del conjunto `doubs`
 
 ```{r}
-rowSums(...)
+rowSums(doubs$fish)
 ```
 
 * Riqueza numérica en `doubs` (no por sitios)
 
 ```{r}
-specnumber(colSums(...))
+specnumber(colSums(doubs$fish))
 ```
 
 * Abundancia total en `doubs` (no por especie ni por sitios)
 
 ```{r}
-sum(colSums(...))
+sum(colSums(doubs$fish))
 ```
 
 * De los conjuntos BCI y `mite`, ¿Cuál tiene más riqueza? Interpreta por qué entiendes que hay tanta diferencia de riqueza entre ambos conjuntos.
 
-    * Tu respuesta aquí: ...
+    * Tu respuesta aquí: BCI
 
 ```{r}
-specnumber(colSums(...))
-specnumber(colSums(...))
+specnumber(colSums(mite))
+specnumber(colSums(BCI))
 ```
 
 
@@ -97,17 +97,17 @@ Consulta [esta referencia](https://github.com/biogeografia-201902/material-de-ap
 
 * Inspección gráfica de la correlación (habría que verificar algunos supuestos, pero nos tomamos una licencia temporal). Realiza un diagrama de dispersión de las variables fosfatos y demanda biológica de oxígeno. ¿Existe relación entre ambas variables? ¿Directa o inversa? ¿Es lineal? Interpreta el resultado.
 
-    * Tu respuesta aquí: ...
+    * Tu respuesta aquí: Tienen una relación directamente proporcional.
 
 ```{r}
-library(...)
-ggplot(data = ...) +
-  geom_point(mapping = aes(x = ..., y = ...))
+library(tidyverse)
+ggplot(data = doubs$env) +
+  geom_point(mapping = aes(x = pho, y = bdo))
 ```
 
 * El siguiente bloque de código muestra el valor de coeficiente de correlación lineal entre las variables anteriores. Interpreta el resultado.
 
-    * Tu respuesta aquí: ...
+    * Tu respuesta aquí: Una correlación positiva.
 
 ```{r}
 cor(doubs$env$bdo, doubs$env$pho)
@@ -116,21 +116,21 @@ cor.test(doubs$env$bdo, doubs$env$pho)
 
 * Realiza histogramas de ambas variables, uno por cada una. ¿Hacia dónde presentan sesgos ambas variables (derecha o izquierda)? ¿Por qué? ¿Es oportuno medir la correlación lineal entre estas variables?
 
-    * Tu respuesta aquí: ...
+    * Tu respuesta aquí: Hacia la derecha. 
 
 ```{r}
-ggplot(data = ...) +
-  geom_histogram(mapping = aes(x = ...), bins = 10)
-ggplot(data = ...) +
-  geom_histogram(mapping = aes(x = ...), bins = 10)
+ggplot(data = doubs$env) +
+  geom_histogram(mapping = aes(x = pho), bins = 10)
+ggplot(data = doubs$env) +
+  geom_histogram(mapping = aes(x = bdo), bins = 10)
 ```
 
 * Diagrama de cajas, *boxplot*. Realiza un diagrama de caja del contenido de agua del substrato (`WatrCont`) y la densidad de arbustos (`Shrub`). Interpreta el resultado.
 
-    * Tu respuesta aquí: ...
+    * Tu respuesta aquí: Donde no hay densidad de arbustos la mediana del contenido de agua en el sustrato esta próximo a la media.
 
 ```{r}
-ggplot(data = ...) +
-  geom_boxplot(mapping = aes(x = ..., y = ...))
+ggplot(data = mite.env) +
+  geom_boxplot(mapping = aes(x = Shrub, y = WatrCont))
 ```
 
