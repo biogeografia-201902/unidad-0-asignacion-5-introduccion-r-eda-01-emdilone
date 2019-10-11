@@ -83,7 +83,7 @@ sum(colSums(doubs$fish))
 
 * De los conjuntos BCI y `mite`, ¿Cuál tiene más riqueza? Interpreta por qué entiendes que hay tanta diferencia de riqueza entre ambos conjuntos.
 
-    * Tu respuesta aquí: BCI
+    * Tu respuesta aquí: BCI, porque esta trabaja con arboles en un area mucho mayor (BCI trabaja en unos 500,000 m² y mite en 175 m²) y con una gran variedad de especies.
 
 ```{r}
 specnumber(colSums(mite))
@@ -97,7 +97,7 @@ Consulta [esta referencia](https://github.com/biogeografia-201902/material-de-ap
 
 * Inspección gráfica de la correlación (habría que verificar algunos supuestos, pero nos tomamos una licencia temporal). Realiza un diagrama de dispersión de las variables fosfatos y demanda biológica de oxígeno. ¿Existe relación entre ambas variables? ¿Directa o inversa? ¿Es lineal? Interpreta el resultado.
 
-    * Tu respuesta aquí: Tienen una relación directamente proporcional.
+    * Tu respuesta aquí: Tienen una relación directamente proporcional, una variable depende de la otra, cuando una aumenta la otra también en la misma proporción.
 
 ```{r}
 library(tidyverse)
@@ -107,7 +107,7 @@ ggplot(data = doubs$env) +
 
 * El siguiente bloque de código muestra el valor de coeficiente de correlación lineal entre las variables anteriores. Interpreta el resultado.
 
-    * Tu respuesta aquí: Una correlación positiva.
+    * Tu respuesta aquí: Una correlación positiva. A mayor cantidad de fosfato, mayor es la demanda biologica de oxigeno.
 
 ```{r}
 cor(doubs$env$bdo, doubs$env$pho)
@@ -116,7 +116,7 @@ cor.test(doubs$env$bdo, doubs$env$pho)
 
 * Realiza histogramas de ambas variables, uno por cada una. ¿Hacia dónde presentan sesgos ambas variables (derecha o izquierda)? ¿Por qué? ¿Es oportuno medir la correlación lineal entre estas variables?
 
-    * Tu respuesta aquí: Hacia la derecha. 
+    * Tu respuesta aquí: Hacia la derecha. Porque la mayor parte de la muestra presenta valores bajos. Es oportuno medir la correlacion lineal, ya que ambas presentan sesgos hacia la misma dirección.
 
 ```{r}
 ggplot(data = doubs$env) +
@@ -127,7 +127,7 @@ ggplot(data = doubs$env) +
 
 * Diagrama de cajas, *boxplot*. Realiza un diagrama de caja del contenido de agua del substrato (`WatrCont`) y la densidad de arbustos (`Shrub`). Interpreta el resultado.
 
-    * Tu respuesta aquí: Donde no hay densidad de arbustos la mediana del contenido de agua en el sustrato esta próximo a la media.
+    * Tu respuesta aquí: Donde no hay densidad de arbustos la media del contenido de agua en el sustrato está próximo a la mitad de la caja, teniendo una distribución simétrica. Cuando tiene poca o alguna densidad de arbustos la distribución ya no es simétrica del contenido de agua, presenta un sesgo hacia los valores mínimos, a mayor densidad arbórea menor cantidad de agua en el sustrato.
 
 ```{r}
 ggplot(data = mite.env) +
