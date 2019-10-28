@@ -107,7 +107,7 @@ ggplot(data = doubs$env) +
 
 * El siguiente bloque de código muestra el valor de coeficiente de correlación lineal entre las variables anteriores. Interpreta el resultado.
 
-    * Tu respuesta aquí: Una correlación positiva. A mayor cantidad de fosfato, mayor es la demanda biologica de oxigeno.
+    * Tu respuesta aquí: Una correlación positiva. A mayor cantidad de fosfato, mayor es la demanda biológica de oxígeno.
 
 ```{r}
 cor(doubs$env$bdo, doubs$env$pho)
@@ -127,7 +127,7 @@ ggplot(data = doubs$env) +
 
 * Diagrama de cajas, *boxplot*. Realiza un diagrama de caja del contenido de agua del substrato (`WatrCont`) y la densidad de arbustos (`Shrub`). Interpreta el resultado.
 
-    * Tu respuesta aquí: Donde no hay densidad de arbustos la media del contenido de agua en el sustrato está próximo a la mitad de la caja, teniendo una distribución simétrica. Cuando tiene poca o alguna densidad de arbustos la distribución ya no es simétrica del contenido de agua, presenta un sesgo hacia los valores mínimos, a mayor densidad arbórea menor cantidad de agua en el sustrato.
+    * Tu respuesta aquí: Donde no hay densidad de arbustos la media del contenido de agua en el sustrato está más alta que en las demás muestras. Mientras tiene más densidad de arbustos la media del contenido de agua baja, por lo que se puede interpretar que a mayor densidad arbórea menor cantidad de agua en el sustrato.
 
 ```{r}
 ggplot(data = mite.env) +

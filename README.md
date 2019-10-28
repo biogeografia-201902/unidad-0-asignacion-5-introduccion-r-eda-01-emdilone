@@ -13,7 +13,7 @@ Consulta las referencias sobre los paquetes necesarios y los conjuntos de datos 
 library(vegan)
 ## Loading required package: permute
 ## Loading required package: lattice
-## This is vegan 2.5-5
+## This is vegan 2.5-6
 library(ade4)
 data(mite)
 data(doubs)
@@ -105,7 +105,7 @@ sum(colSums(doubs$fish))
 
 -   De los conjuntos BCI y `mite`, ¿Cuál tiene más riqueza? Interpreta por qué entiendes que hay tanta diferencia de riqueza entre ambos conjuntos.
 
-    -   Tu respuesta aquí: BCI
+    -   Tu respuesta aquí: BCI, porque esta trabaja con arboles en un area mucho mayor (BCI trabaja en unos 500,000 m² y mite en 175 m²) y con una gran variedad de especies.
 
 ``` r
 specnumber(colSums(mite))
@@ -121,14 +121,14 @@ Consulta [esta referencia](https://github.com/biogeografia-201902/material-de-ap
 
 -   Inspección gráfica de la correlación (habría que verificar algunos supuestos, pero nos tomamos una licencia temporal). Realiza un diagrama de dispersión de las variables fosfatos y demanda biológica de oxígeno. ¿Existe relación entre ambas variables? ¿Directa o inversa? ¿Es lineal? Interpreta el resultado.
 
-    -   Tu respuesta aquí: Tienen una relación directamente proporcional.
+    -   Tu respuesta aquí: Tienen una relación directamente proporcional, una variable depende de la otra, cuando una aumenta la otra también en la misma proporción.
 
 ``` r
 library(tidyverse)
 ## ── Attaching packages ─────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
-## ✔ ggplot2 3.2.1     ✔ purrr   0.3.2
+## ✔ ggplot2 3.2.1     ✔ purrr   0.3.3
 ## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   0.8.3     ✔ stringr 1.4.0
+## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
 ## ✔ readr   1.3.1     ✔ forcats 0.4.0
 ## ── Conflicts ────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
@@ -141,7 +141,7 @@ ggplot(data = doubs$env) +
 
 -   El siguiente bloque de código muestra el valor de coeficiente de correlación lineal entre las variables anteriores. Interpreta el resultado.
 
-    -   Tu respuesta aquí: Una correlación positiva.
+    -   Tu respuesta aquí: Una correlación positiva. A mayor cantidad de fosfato, mayor es la demanda biológica de oxígeno.
 
 ``` r
 cor(doubs$env$bdo, doubs$env$pho)
@@ -162,7 +162,7 @@ cor.test(doubs$env$bdo, doubs$env$pho)
 
 -   Realiza histogramas de ambas variables, uno por cada una. ¿Hacia dónde presentan sesgos ambas variables (derecha o izquierda)? ¿Por qué? ¿Es oportuno medir la correlación lineal entre estas variables?
 
-    -   Tu respuesta aquí: Hacia la derecha.
+    -   Tu respuesta aquí: Hacia la derecha. Porque la mayor parte de la muestra presenta valores bajos. Es oportuno medir la correlacion lineal, ya que ambas presentan sesgos hacia la misma dirección.
 
 ``` r
 ggplot(data = doubs$env) +
@@ -180,7 +180,7 @@ ggplot(data = doubs$env) +
 
 -   Diagrama de cajas, *boxplot*. Realiza un diagrama de caja del contenido de agua del substrato (`WatrCont`) y la densidad de arbustos (`Shrub`). Interpreta el resultado.
 
-    -   Tu respuesta aquí: Donde no hay densidad de arbustos la mediana del contenido de agua en el sustrato esta próximo a la media.
+    -   Tu respuesta aquí: Donde no hay densidad de arbustos la media del contenido de agua en el sustrato está más alta que en las demás muestras. Mientras tiene más densidad de arbustos la media del contenido de agua baja, por lo que se puede interpretar que a mayor densidad arbórea menor cantidad de agua en el sustrato.
 
 ``` r
 ggplot(data = mite.env) +
